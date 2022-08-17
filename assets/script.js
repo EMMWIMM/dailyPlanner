@@ -27,10 +27,38 @@ var sixPMbtn = document.getElementById("sixPMbtn");
 var sevenPMbtn = document.getElementById("sevenPMbtn");
 var eightPMbtn = document.getElementById("eightPMbtn");
 var ninePMbtn = document.getElementById("ninePMbtn");
+var today = new Date();
+var hours = today.getHours();
+var minutes = today.getMinutes();
+var amPm = " am"
 
-
+// $("currentDay").text(today.format("dddd, MMMM Do YYYY, h:mm a"));
+// console.log(today);
+// currentDay.textContent= today;
 // set current time and date counter
 
+
+
+
+
+
+function setInterval(){
+if(hours > 12){
+  hours = hours-12;
+  amPm = " pm"
+}}
+
+function setColor(){
+  if( hours == 1 && amPm == " pm"){
+    document.onePM.classname = "present";
+  }
+  else if (hours <= 1 || amPm == " am") {
+    document.onePM.classname = "past";
+  }
+  else {
+    document.onePM.classname = "future";
+  }
+}
 // change color of input feilds, .past/.present/.future
 
 // save tasks in local storage
