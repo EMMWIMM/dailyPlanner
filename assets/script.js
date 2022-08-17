@@ -1,18 +1,18 @@
 var currentDay = document.getElementById("currentDay");
 var task = document.querySelector(".description");
-var nineAM = document.getElementById("nineAM");
-var tenAM = document.getElementById("tenAM");
-var elevenAM = document.getElementById("elevenAM");
-var noon = document.getElementById("noon");
-var onePM = document.getElementById("onePM");
-var twoPM = document.getElementById("twoPM");
-var threePM = document.getElementById("threePM");
-var fourPM = document.getElementById("fourPM");
-var fivePM = document.getElementById("fivePM");
-var sixPM = document.getElementById("sixPM");
-var sevenPM = document.getElementById("sevenPM");
-var eightPM = document.getElementById("eightPM");
-var ninePM = document.getElementById("ninePM");
+var h9 = document.getElementById("h9");
+var h10 = document.getElementById("h10");
+var h11 = document.getElementById("h11");
+var h12 = document.getElementById("h12");
+var h13 = document.getElementById("h13");
+var h14 = document.getElementById("h14");
+var h15 = document.getElementById("h15");
+var h16 = document.getElementById("h16");
+var h17 = document.getElementById("h17");
+var h18 = document.getElementById("h18");
+var h19 = document.getElementById("h19");
+var h20 = document.getElementById("h20");
+var h21 = document.getElementById("h21");
 
 var nineAMbtn = document.getElementById("nineAMbtn");
 var tenAMbtn = document.getElementById("tenAMbtn");
@@ -31,11 +31,12 @@ var today = new Date();
 var hour = today.getHours();
 var minutes = today.getMinutes();
 var amPm = " am"
+var taskList = [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 
 
 
 setColor();
-initializeLocalStorage();
+// initializeLocalStorage();
 renderTasksToPage();
 
 
@@ -46,20 +47,10 @@ currentDay.textContent= today;
 
 function setColor(){
   console.log('setColor');
-  // if( hours == 1 && amPm == " pm"){
-  //   document.onePM.classname = "present";
-  // }
-  // else if (hours <= 1 || amPm == " am") {
-  //   document.onePM.classname = "past";
-  // }
-  // else {
-  //   document.onePM.classname = "future";
-  // }
-
   var hourDescs = document.getElementsByClassName("description");
   for(let i = 0; i < hourDescs.length; ++i){
     console.log(hourDescs[i].id);
-    var offset = 9;
+
     if(hourDescs[i].id.substring(1) < hour){
         hourDescs[i].classList.add('past');
     } else if(hourDescs[i].id.substring(1) == hour){
@@ -74,9 +65,10 @@ var testTasks = ['','','','','',
 function renderTasksToPage(){
   console.log('renderTasksToPage');
   var tasks = localStorage.getItem('tasks');
+  var taskList = JSON.parse(localStorage.getItem('tasks'));
   var hourDescs = document.getElementsByClassName("description");
     for(let i = 0; i < hourDescs.length; ++i){
-      hourDescs[i].value = tasks[i];
+      hourDescs[i].value = taskList[i];
     }
 
 }
@@ -84,10 +76,10 @@ function renderTasksToPage(){
 function initializeLocalStorage(){
   console.log("initializeLocalStorage");
   //see if there are 'tasks' in localStorage
-
+var emptyTasks = JSON.stringify(taskList)
   //if not create array with '' for each hours
-  var emptyTasks = new Array(document.getElementsByClassName("description").length)
-  localStorage.setItem("tasks", testTasks);
+  // var emptyTasks = new Array(document.getElementsByClassName("description").length)
+  localStorage.setItem("tasks", emptyTasks);
   console.log(emptyTasks.length);
 }
 
@@ -96,15 +88,18 @@ function storeTask(id){
 
   //do stuff
   console.log('element('+id+') value = '+document.getElementById(id).value);
-  tempTasks [id.substring(1)-9] = document.getElementById(id).value;
-
-  localStorage.setItem("tasks", tempTasks)
+  taskList[id.substring(1)-9] = document.getElementById(id).value;
+  //
+  //
+  // localStorage.setItem("tasks", tempTasks)
+  initializeLocalStorage();
 
 
 }
 
 
-// change color of input feilds, .past/.present/.future
+
+
 
 // save tasks in local storage
 
