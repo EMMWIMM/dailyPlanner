@@ -36,14 +36,10 @@ var taskList = [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 
 
 setColor();
-// initializeLocalStorage();
 renderTasksToPage();
 
-
-// $("currentDay").text(today.format("dddd, MMMM Do YYYY, h:mm a"));
-// console.log(today);
 currentDay.textContent= today;
-// set current time and date counter
+
 
 function setColor(){
   console.log('setColor');
@@ -60,8 +56,7 @@ function setColor(){
     }
   }
 }
-var testTasks = ['','','','','',
-            'LUNCH', 'nap','work','go home', 'play games', 'eat dinner', 'go to sleep']
+
 function renderTasksToPage(){
   console.log('renderTasksToPage');
   var tasks = localStorage.getItem('tasks');
@@ -75,36 +70,15 @@ function renderTasksToPage(){
 
 function initializeLocalStorage(){
   console.log("initializeLocalStorage");
-  //see if there are 'tasks' in localStorage
-var emptyTasks = JSON.stringify(taskList)
-  //if not create array with '' for each hours
-  // var emptyTasks = new Array(document.getElementsByClassName("description").length)
+  var emptyTasks = JSON.stringify(taskList)
   localStorage.setItem("tasks", emptyTasks);
   console.log(emptyTasks.length);
 }
 
 var tempTasks = localStorage.getItem("tasks");
-function storeTask(id){
 
-  //do stuff
+function storeTask(id){
   console.log('element('+id+') value = '+document.getElementById(id).value);
   taskList[id.substring(1)-9] = document.getElementById(id).value;
-  //
-  //
-  // localStorage.setItem("tasks", tempTasks)
   initializeLocalStorage();
-
-
 }
-
-
-
-
-
-// save tasks in local storage
-
-// spit tasks back out from local storage on page reload
-
-
-
-// OPTIONAL: make pin button change color when task is pinned
